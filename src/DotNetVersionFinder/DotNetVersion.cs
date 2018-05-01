@@ -31,6 +31,8 @@ namespace DotNetVersionFinder
             [460805] = new Version(4, 7),
             [461308] = new Version(4, 7, 1),
             [461310] = new Version(4, 7, 1),
+            [461808] = new Version(4, 7, 2),
+            [461814] = new Version(4, 7, 2),
         };
 
         /// <summary>
