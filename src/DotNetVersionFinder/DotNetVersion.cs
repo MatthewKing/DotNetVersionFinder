@@ -41,7 +41,7 @@ namespace DotNetVersionFinder
         /// <returns>The .NET Framework version that is installed on this machine.</returns>
         public static Version Find()
         {
-            var releaseKey = GetDotNetReleaseKeyFromRegistry();
+            var releaseKey = FindReleaseKey();
             if (releaseKey.HasValue && Versions.TryGetValue(releaseKey.Value, out var version))
             {
                 return version;
@@ -50,6 +50,15 @@ namespace DotNetVersionFinder
             {
                 return null;
             }
+        }
+
+        /// <summary>
+        /// Returns the release key of the .NET Framework version that is installed on this machine.
+        /// </summary>
+        /// <returns>The release key of the .NET Framework version that is installed on this machine.</returns>
+        public static int? FindReleaseKey()
+        {
+            return GetDotNetReleaseKeyFromRegistry();
         }
 
         /// <summary>
