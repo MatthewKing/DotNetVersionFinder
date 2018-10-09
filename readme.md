@@ -30,6 +30,10 @@ This library doesn't currently support .NET Framework versions 1.0 through to 4.
 Release notes
 -------------
 
+### 1.1.0
+
+* Add support for retrieving the current .NET Framework release key via `DotNetVersion.FindReleaseKey()`.
+
 ### 1.0.1
 
 * Add support for .NET Framework 4.7.2.
