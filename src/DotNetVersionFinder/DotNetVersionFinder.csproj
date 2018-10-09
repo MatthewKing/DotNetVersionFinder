@@ -5,7 +5,7 @@
     <Title>DotNetVersionFinder</Title>
     <Description>Provides functionality to find which version of the .NET Framework is installed on a system.</Description>
     <Authors>Matthew King</Authors>
-    <Copyright>Copyright 2018 Matthew King.</Copyright>
+    <Copyright>Copyright Matthew King.</Copyright>
     <PackageProjectUrl>https://github.com/MatthewKing/DotNetVersionFinder</PackageProjectUrl>
     <PackageLicenseUrl>https://opensource.org/licenses/MIT</PackageLicenseUrl>
     <PackageTags>framework;version</PackageTags>

@@ -50,5 +50,5 @@ PM> Install-Package DotNetVersionFinder
 License and copyright
 ---------------------
 
-Copyright Matthew King 2018.
+Copyright (c) Matthew King.
 Distributed under the [MIT License](http://opensource.org/licenses/MIT). Refer to license.txt for more information.
