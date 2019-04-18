@@ -9,7 +9,7 @@
     <PackageProjectUrl>https://github.com/MatthewKing/DotNetVersionFinder</PackageProjectUrl>
     <PackageLicenseUrl>https://opensource.org/licenses/MIT</PackageLicenseUrl>
     <PackageTags>framework;version</PackageTags>
-    <VersionPrefix>1.1.0</VersionPrefix>
+    <VersionPrefix>1.1.1</VersionPrefix>
   </PropertyGroup>
 
   <PropertyGroup>
