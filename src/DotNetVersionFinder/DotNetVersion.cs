@@ -38,7 +38,7 @@ namespace DotNetVersionFinder
             var releaseKey = FindReleaseKey();
             foreach (var version in Versions.OrderByDescending(x => x.Key))
             {
-                if (releaseKey > version.Key)
+                if (releaseKey >= version.Key)
                 {
                     return version.Value;
                 }
