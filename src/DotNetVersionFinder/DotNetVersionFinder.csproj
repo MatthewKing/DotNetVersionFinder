@@ -11,7 +11,7 @@
     <RepositoryUrl>https://github.com/MatthewKing/DotNetVersionFinder</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <PackageTags>framework;version</PackageTags>
-    <VersionPrefix>1.1.1</VersionPrefix>
+    <VersionPrefix>1.1.2</VersionPrefix>
   </PropertyGroup>
 
   <PropertyGroup>
