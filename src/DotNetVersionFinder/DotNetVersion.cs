@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Microsoft.Win32;
 
 namespace DotNetVersionFinder
@@ -10,29 +11,22 @@ namespace DotNetVersionFinder
     public static class DotNetVersion
     {
         /// <summary>
-        /// Maps the release keys to the associated versions.
+        /// Maps the minimum release keys to the associated versions.
         /// </summary>
         /// <remarks>
-        /// See https://docs.microsoft.com/en-us/dotnet/framework/migration-guide/versions-and-dependencies
+        /// See https://docs.microsoft.com/en-us/dotnet/framework/migration-guide/minimum-release-dword
         /// </remarks>
         private static readonly SortedDictionary<int, Version> Versions = new SortedDictionary<int, Version>
         {
             [378389] = new Version(4, 5),
             [378675] = new Version(4, 5, 1),
-            [378758] = new Version(4, 5, 1),
             [379893] = new Version(4, 5, 2),
             [393295] = new Version(4, 6),
-            [393297] = new Version(4, 6),
             [394254] = new Version(4, 6, 1),
-            [394271] = new Version(4, 6, 1),
             [394802] = new Version(4, 6, 2),
-            [394806] = new Version(4, 6, 2),
             [460798] = new Version(4, 7),
-            [460805] = new Version(4, 7),
             [461308] = new Version(4, 7, 1),
-            [461310] = new Version(4, 7, 1),
             [461808] = new Version(4, 7, 2),
-            [461814] = new Version(4, 7, 2),
         };
 
         /// <summary>
@@ -42,14 +36,15 @@ namespace DotNetVersionFinder
         public static Version Find()
         {
             var releaseKey = FindReleaseKey();
-            if (releaseKey.HasValue && Versions.TryGetValue(releaseKey.Value, out var version))
+            foreach (var version in Versions.OrderByDescending(x => x.Key))
             {
-                return version;
+                if (releaseKey > version.Key)
+                {
+                    return version.Value;
+                }
             }
-            else
-            {
-                return null;
-            }
+
+            return null;
         }
 
         /// <summary>
