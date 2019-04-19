@@ -30,6 +30,10 @@ This library doesn't currently support .NET Framework versions 1.0 through to 4.
 Release notes
 -------------
 
+### 1.1.3
+
+* Add support for .NET Framework 4.8.
+
 ### 1.1.2
 
 * Add support for undocumented release keys.
