@@ -24,6 +24,7 @@ The following versions of the .NET Framework are currently supported by this lib
 * 4.7
 * 4.7.1
 * 4.7.2
+* 4.8
 
 This library doesn't currently support .NET Framework versions 1.0 through to 4.0, as they are no longer supported by Microsoft, and they add additional complexity to the code. However, if there is enough demand I will gladly add support. Pull requests are welcome.
 
