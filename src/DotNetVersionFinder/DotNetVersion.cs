@@ -109,13 +109,19 @@ public static class DotNetVersion
             return null;
         }
 #endif
-
-        using var hklm = RegistryKey.OpenBaseKey(RegistryHive.LocalMachine, RegistryView.Registry32);
-        using var key = hklm.OpenSubKey(@"SOFTWARE\Microsoft\NET Framework Setup\NDP\v4\Full\");
-        var value = key.GetValue("Release");
-        if (value is int releaseKey)
+        try
         {
-            return releaseKey;
+            using var hklm = RegistryKey.OpenBaseKey(RegistryHive.LocalMachine, RegistryView.Registry32);
+            using var key = hklm.OpenSubKey(@"SOFTWARE\Microsoft\NET Framework Setup\NDP\v4\Full\");
+            var value = key.GetValue("Release");
+            if (value is int releaseKey)
+            {
+                return releaseKey;
+            }
+        }
+        catch (Exception)
+        {
+            // Swallow all exceptions.
         }
 
         return null;
