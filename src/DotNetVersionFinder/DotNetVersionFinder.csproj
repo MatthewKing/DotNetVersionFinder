@@ -17,6 +17,7 @@
   <PropertyGroup>
     <TargetFrameworks>net45</TargetFrameworks>
     <LangVersion>latest</LangVersion>
+    <ImplicitUsings>enable</ImplicitUsings>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
   </PropertyGroup>
 
