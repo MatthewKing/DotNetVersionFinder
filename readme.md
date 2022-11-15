@@ -8,7 +8,7 @@ Provides functionality to find the highest version of .NET that is installed on 
 2) Call `DotNetVersion.GetVersion()`
 3) You're done!
 
-Alternatively, if you want to be more specific as to which .NET version you're getting, you can use: `DotNetVersion.GetVersionFromDotNetCli()` or `DotNetVersion.GetFrameworkVersionFromRegistry()`. Also, for power users, you can get the release key from the registry using `DotNetVersion.GetFrameworkReleaseKeyFromRegistry()`.
+Alternatively, if you want to be more specific as to which .NET version you're getting, you can use: `DotNetVersion.GetDotNetCliVersion()` or `DotNetVersion.GetFrameworkVersion()`. Also, for power users, you can get the release key from the registry using `DotNetVersion.GetFrameworkReleaseKey()`.
 
 ## Supported .NET verions
 

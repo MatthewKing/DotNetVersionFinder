@@ -10,34 +10,20 @@ public static class DotNetVersion
 {
     /// <summary>
     /// Returns the highest version of .NET that is installed on this machine.
+    /// This will look for the version information from the dotnet CLI and then
+    /// fall back to the .NET Framework version from the registry.
     /// </summary>
     /// <returns>The .NET version (or null if it was unable to be determined).</returns>
     public static Version GetVersion()
     {
-        // First, we look for versions with the .NET CLI:
-
-        var cliVersion = GetVersionFromDotNetCli();
-        if (cliVersion is not null)
-        {
-            return cliVersion;
-        }
-
-        // Next, look for a .NET framework version:
-
-        var registryVersion = GetFrameworkVersionFromRegistry();
-        if (registryVersion is not null)
-        {
-            return registryVersion;
-        }
-
-        return null;
+        return GetDotNetCliVersion() ?? GetFrameworkVersion();
     }
 
     /// <summary>
     /// Returns the version of .NET that is installed on this machine, as reported by the dotnet CLI.
     /// </summary>
     /// <returns>The .NET version (or null if it was unable to be determined).</returns>
-    public static Version GetVersionFromDotNetCli()
+    public static Version GetDotNetCliVersion()
     {
         try
         {
@@ -73,11 +59,11 @@ public static class DotNetVersion
     /// determined by reading the framework release key from the Windows registry.
     /// </summary>
     /// <returns>The .NET Framework version (or null if it was unable to be determined).</returns>
-    public static Version GetFrameworkVersionFromRegistry()
+    public static Version GetFrameworkVersion()
     {
         // See https://docs.microsoft.com/en-us/dotnet/framework/migration-guide/minimum-release-dword
 
-        return GetFrameworkReleaseKeyFromRegistry() switch
+        return GetFrameworkReleaseKey() switch
         {
             >= 533320 => new Version(4, 8, 1),
             >= 528040 => new Version(4, 8),
@@ -101,7 +87,7 @@ public static class DotNetVersion
     /// <remarks>
     /// See https://docs.microsoft.com/en-us/dotnet/framework/migration-guide/how-to-determine-which-versions-are-installed
     /// </remarks>
-    public static int? GetFrameworkReleaseKeyFromRegistry()
+    public static int? GetFrameworkReleaseKey()
     {
 #if NET6_0_OR_GREATER
         if (!OperatingSystem.IsWindows())
