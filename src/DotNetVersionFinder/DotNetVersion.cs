@@ -25,6 +25,7 @@ public static class DotNetVersion
         [461308] = new Version(4, 7, 1),
         [461808] = new Version(4, 7, 2),
         [528040] = new Version(4, 8),
+        [533320] = new Version(4, 8, 1),
     };
 
     /// <summary>
