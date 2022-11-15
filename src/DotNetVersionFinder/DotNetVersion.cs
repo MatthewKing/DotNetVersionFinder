@@ -64,16 +64,12 @@ public static class DotNetVersion
     /// </remarks>
     private static int? GetDotNetReleaseKeyFromRegistry()
     {
-        using (var hklm = RegistryKey.OpenBaseKey(RegistryHive.LocalMachine, RegistryView.Registry32))
+        using var hklm = RegistryKey.OpenBaseKey(RegistryHive.LocalMachine, RegistryView.Registry32);
+        using var key = hklm.OpenSubKey(@"SOFTWARE\Microsoft\NET Framework Setup\NDP\v4\Full\");
+        var value = key.GetValue("Release");
+        if (value is int releaseKey)
         {
-            using (var key = hklm.OpenSubKey(@"SOFTWARE\Microsoft\NET Framework Setup\NDP\v4\Full\"))
-            {
-                var value = key.GetValue("Release");
-                if (value is int releaseKey)
-                {
-                    return releaseKey;
-                }
-            }
+            return releaseKey;
         }
 
         return null;
