@@ -4,7 +4,7 @@ using Microsoft.Win32;
 namespace DotNetVersionFinder;
 
 /// <summary>
-/// Provides functionality to find which version of the .NET Framework that is installed on the current machine.
+/// Provides functionality to find the version of .NET that is installed on the current machine.
 /// </summary>
 public static class DotNetVersion
 {
