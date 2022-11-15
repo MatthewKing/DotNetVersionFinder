@@ -64,6 +64,13 @@ public static class DotNetVersion
     /// </remarks>
     private static int? GetDotNetReleaseKeyFromRegistry()
     {
+#if NET6_0_OR_GREATER
+        if (!OperatingSystem.IsWindows())
+        {
+            return null;
+        }
+#endif
+
         using var hklm = RegistryKey.OpenBaseKey(RegistryHive.LocalMachine, RegistryView.Registry32);
         using var key = hklm.OpenSubKey(@"SOFTWARE\Microsoft\NET Framework Setup\NDP\v4\Full\");
         var value = key.GetValue("Release");
