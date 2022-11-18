@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics;
+using System.Text.RegularExpressions;
 using Microsoft.Win32;
 
 namespace DotNetVersionFinder;
@@ -6,8 +7,16 @@ namespace DotNetVersionFinder;
 /// <summary>
 /// Provides functionality to find the version of .NET that is installed on the current machine.
 /// </summary>
-public static class DotNetVersion
+public static partial class DotNetVersion
 {
+#if NET7_0_OR_GREATER
+    [GeneratedRegex(".*? ([0-9]+\\.[0-9]+\\.[0-9]+) \\[.*?\\]")]
+    private static partial Regex DotNetRuntimeRegex();
+#else
+    private static Regex DotNetRuntimeRegexValue { get; } = new Regex(".*? ([0-9]+\\.[0-9]+\\.[0-9]+) \\[.*?\\]");
+    private static Regex DotNetRuntimeRegex() => DotNetRuntimeRegexValue;
+#endif
+
     /// <summary>
     /// Returns the highest version of .NET that is installed on this machine.
     /// This will look for the version information from the dotnet CLI and then
@@ -25,11 +34,13 @@ public static class DotNetVersion
     /// <returns>The .NET version (or null if it was unable to be determined).</returns>
     public static Version GetDotNetCliVersion()
     {
+        var maxVersion = default(Version);
+
         try
         {
             var psi = new ProcessStartInfo();
             psi.FileName = "dotnet";
-            psi.Arguments = "--version";
+            psi.Arguments = "--list-runtimes";
             psi.UseShellExecute = false;
             psi.CreateNoWindow = true;
             psi.RedirectStandardOutput = true;
@@ -40,9 +51,22 @@ public static class DotNetVersion
             {
                 process.WaitForExit();
 
-                if (Version.TryParse(process.StandardOutput.ReadToEnd(), out var version))
+                string line;
+                while ((line = process.StandardOutput.ReadLine()) != null)
                 {
-                    return version;
+                    if (string.IsNullOrEmpty(line))
+                    {
+                        continue;
+                    }
+
+                    var match = DotNetRuntimeRegex().Match(line);
+                    if (match.Success && Version.TryParse(match.Groups[1].Value, out var v))
+                    {
+                        if (v > maxVersion)
+                        {
+                            maxVersion = v;
+                        }
+                    }
                 }
             }
         }
@@ -51,7 +75,7 @@ public static class DotNetVersion
             // Swallow all exceptions.
         }
 
-        return null;
+        return maxVersion;
     }
 
     /// <summary>
