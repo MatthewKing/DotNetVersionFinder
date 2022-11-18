@@ -7,6 +7,7 @@
     <Authors>Matthew King</Authors>
     <Copyright>Copyright Matthew King.</Copyright>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageReadmeFile>readme.md</PackageReadmeFile>
     <PackageProjectUrl>https://github.com/MatthewKing/DotNetVersionFinder</PackageProjectUrl>
     <RepositoryUrl>https://github.com/MatthewKing/DotNetVersionFinder</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
@@ -20,6 +21,12 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="..\..\readme.md" Pack="true" PackagePath="\">
+      <Visible>false</Visible>
+    </None>
+  </ItemGroup>
 
   <PropertyGroup>
     <PublishRepositoryUrl>true</PublishRepositoryUrl>
