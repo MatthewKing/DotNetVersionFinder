@@ -20,6 +20,10 @@ This library doesn't currently support .NET Framework versions 1.0 through to 4.
 
 ## Release notes
 
+### 2.1.0
+
+* Use `--list-runtimes` rather than `--version` when determining version via the dotnet CLI. This gives the runtime version rather than the SDK version, which is more correct for our usage.
+
 ### 2.0.0
 
 * Overhaul API.
