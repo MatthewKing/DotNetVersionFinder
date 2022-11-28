@@ -62,7 +62,7 @@ public static partial class DotNetVersion
                     var match = DotNetRuntimeRegex().Match(line);
                     if (match.Success && Version.TryParse(match.Groups[1].Value, out var v))
                     {
-                        if (v > maxVersion)
+                        if (maxVersion is null || v > maxVersion)
                         {
                             maxVersion = v;
                         }
